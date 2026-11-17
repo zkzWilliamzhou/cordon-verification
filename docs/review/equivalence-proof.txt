@@ -1,0 +1,6 @@
+legacy reconstruction written to /tmp/cordon-equivalence-wl0tlzlb/cordon
+[PASS] recorded before == recorded after
+[PASS] rebuilt legacy == recorded before
+[PASS] final code == recorded before
+[PASS] final code == rebuilt legacy
+EQUIVALENCE_PROOF: BYTE_IDENTICAL

@@ -1,0 +1,70 @@
+=== ROUND 1 ===
+[PASS] R1 unittest suite: rc=0 tests=OK
+[PASS] R1 compileall: rc=0 
+[PASS] R1 every renderer carries advisory label: scan disclaimer present
+round 1: 3/3 passed
+
+=== ROUND 2 ===
+[PASS] R2 html comment override: 2 findings: ['CORDON-INJ-001', 'CORDON-INJ-002']
+[PASS] R2 frontmatter override: 2 findings: ['CORDON-INJ-001', 'CORDON-INJ-002']
+[PASS] R2 base64 override: 1 findings: ['CORDON-ENC-001']
+[PASS] R2 zero width: 2 findings: ['CORDON-INJ-001', 'CORDON-UNI-001']
+[PASS] R2 rtl override: 2 findings: ['CORDON-INJ-001', 'CORDON-UNI-001']
+[PASS] R2 homoglyph: 2 findings: ['CORDON-INJ-001', 'CORDON-UNI-002']
+[PASS] R2 meta evasion: 1 findings: ['CORDON-META-001']
+[PASS] R2 URL fragments are not path candidates: URL fragments mistaken for fs.read candidates: []
+round 2: 8/8 passed
+
+=== ROUND 3 ===
+[PASS] R3 symlink swap fails closed: enumerated 1 files, symlink refused
+[PASS] R3 pin re-verify closes scan-to-run gap: refused: pin mismatch: skill content changed
+[PASS] R3 traversal filenames never enter records: files=['SKILL.md', 'a..b.md'], is_safe_rel rejects ../
+round 3: 3/3 passed
+
+=== ROUND 4 ===
+[PASS] R4 malformed ledger tail fails closed: refused: ledger tail is missing index or entry_hash
+[PASS] R4 malformed pin rows fail closed: refused: pin has a malformed file row
+[PASS] R4 wrong verification key refused: refused: signature key is not the trusted key
+[PASS] R4 canonical JSON rejects duplicate keys: duplicate key rejected
+round 4: 4/4 passed
+
+=== ROUND 5 ===
+[PASS] R5 evil scan exits 1 by default: exit 1
+[PASS] R5 clean scan exits 0: exit 0
+[PASS] R5 hook deny exits 126 with --exit-on-deny: rc=126 stdout={"capability": "exec", "decision": "deny", "detail": {"exe": "sudo"}, "reason": "executable 'sudo' i
+[PASS] R5 demo verdict cites the manifest: demo verdict cites the manifest allowlist
+[PASS] R5 malformed hook input errors fast: cordon: invalid tool-call JSON: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+[PASS] R5 empty stdin does not hang: rc=1 stderr=cordon: invalid tool-call JSON: Expecting value: line 1 column 1 (char 0)
+round 5: 6/6 passed
+
+=== ROUND 6 ===
+[PASS] R6 file count and error list are bounded: files=500 errors=121 duration=0.08s
+[PASS] R6 total size cap applies across directories: total_bytes=9800016 duration=0.19s
+[PASS] R6 long adversarial line completes quickly: duration=0.00s findings=0
+round 6: 3/3 passed
+
+=== ROUND 7 ===
+[PASS] R7 evidence output escapes bidi controls: bidi control escaped in evidence
+[PASS] R7 UTF-16 BOM is decoded and scanned: note=utf-16-le findings=2
+[PASS] R7 CRLF line endings are handled: findings=1
+round 7: 3/3 passed
+
+=== ROUND 8 ===
+[PASS] R8 runtime modules make no network calls: network imports in runtime modules: []
+[PASS] R8 pyproject.toml parses: tomllib unavailable; textual fields checked
+[PASS] R8 import works without the dev launcher: 0.1.0
+[PASS] R8 vendored skill lockfile is complete: sources=5 skills=30
+[PASS] R8 vendored skills verify strictly offline: rc=0 OFFLINE_OK sources=5 tarballs=5 skills=30
+[PASS] R8 vendored tarballs reproduce the corpus offline: install_rc=0 verify_rc=0 lockfile=byte-identical OFFLINE_OK
+[PASS] R8 third-party NOTICE present: NOTICE.md present
+round 8: 7/7 passed
+
+=== ROUND 9 ===
+[PASS] R9 README has no safety or star overclaim: overclaims=[] advisory_present=True
+[PASS] R9 versioned formats published: specs=['AUDIT-LEDGER-v1.md', 'CAPABILITY-MANIFEST-v1.md']
+[PASS] R9 architecture refactor preserved all functions: before/after byte-identical
+[PASS] R9 independent legacy reconstruction proves equivalence: rc=0 checks=4 BYTE_IDENTICAL
+[PASS] R9 nine review rounds logged: round logs=9
+round 9: 5/5 passed
+
+TOTAL FAILURES: 0

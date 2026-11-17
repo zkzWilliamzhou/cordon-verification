@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cordon architecture review — deepening opportunities</title>
+<style>
+  :root { --ink:#16202b; --muted:#5c6b7a; --line:#d8e0e8; --bg:#f6f8fa; --card:#fff; --accent:#1d6f5c; --warn:#b4531a; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:32px; background:var(--bg); color:var(--ink);
+         font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+  h1 { font-size:28px; margin:0 0 4px; }
+  h2 { font-size:19px; margin:32px 0 12px; }
+  p.lead { color:var(--muted); max-width:900px; margin:0 0 24px; }
+  .meta { color:var(--muted); font-size:13px; margin-bottom:24px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:20px; margin:0 0 20px; box-shadow:0 1px 2px rgba(16,32,48,.04); }
+  .card h3 { margin:0 0 4px; font-size:18px; }
+  .badge { display:inline-block; font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+           padding:3px 9px; border-radius:99px; margin-left:8px; vertical-align:middle; }
+  .strong { background:#d8f0e7; color:#14513f; }
+  .worth  { background:#fdebd3; color:#8a4212; }
+  .spec   { background:#e6e9f3; color:#3a4470; }
+  .row { display:grid; grid-template-columns:120px 1fr; gap:8px; margin-top:10px; }
+  .row b { color:var(--muted); font-weight:600; font-size:13px; }
+  .files { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12.5px;
+           background:#f1f4f7; padding:2px 6px; border-radius:4px; }
+  .diagram { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:18px; }
+  .panel { border:1px dashed var(--line); border-radius:8px; padding:14px; background:#fbfcfd; }
+  .panel h4 { margin:0 0 10px; font-size:13px; color:var(--muted); letter-spacing:.04em;
+              text-transform:uppercase; }
+  svg { width:100%; height:auto; display:block; }
+  .top { border-left:4px solid var(--accent); background:#eef7f3; padding:16px 20px;
+         border-radius:0 8px 8px 0; margin-top:28px; }
+  .note { color:var(--muted); font-size:13px; }
+  code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12.5px; }
+</style>
+</head>
+<body>
+<h1>Cordon architecture review</h1>
+<p class="meta">2026-11-11 · v0.1 · vocabulary from <code>GLOSSARY.md</code> and <code>codebase-design</code> · ADRs in <code>docs/adr/</code></p>
+<p class="lead">The review walks the modules that changed during the nine review rounds and asks where one concept forces a reader to jump between files. Each card names a deepening opportunity: a refactor that makes a shallow module deep. The report is self-contained and offline; inline CSS and hand-drawn SVG replace the CDN frameworks so the artefact stays reproducible in this sandbox.</p>
+
+<div class="card">
+  <h3>C1 — Give inspection one interface <span class="badge strong">Strong</span></h3>
+  <div class="row"><b>Files</b><div><span class="files">src/cordon/scan.py</span> <span class="files">src/cordon/manifest.py</span> <span class="files">src/cordon/inspector.py</span> (new)</div></div>
+  <div class="row"><b>Problem</b><div><code>scan_lines(lines)</code> and <code>extract_entities(files)</code> both own a line model. <code>manifest.derive</code> calls the second one, so Cordon parses every skill file twice. The seam between a detection rule and a derived capability is implicit: a change to the line model can change findings and capabilities differently. Understanding one concept takes two passes through two functions.</div></div>
+  <div class="row"><b>Solution</b><div>Create one deep module, <code>inspector</code>, with the interface <code>inspect(files) -&gt; Inspection(findings, entities, errors)</code>. It owns the line model, the rules and the candidate extraction. <code>scan</code> becomes a thin adapter over <code>fs</code> and <code>inspector</code>. Keep <code>scan_lines</code> and <code>extract_entities</code> as compatibility adapters so the interface stays the test surface.</div></div>
+  <div class="row"><b>Benefits</b><div><b>Locality</b>: one walk of one line model produces both outputs. <b>Leverage</b>: one rule change reaches findings, the manifest and every adapter behind the same seam. <b>Depth</b>: a large implementation hides behind one call. <b>Deletion test</b>: removing <code>inspector</code> would move the line model back into two callers rather than concentrate it, which is the signal to keep it.</div></div>
+  <div class="diagram">
+    <div class="panel"><h4>Before</h4>
+      <svg viewBox="0 0 320 180" role="img" aria-label="Before: two parsers">
+        <rect x="10" y="16" width="90" height="34" rx="5" fill="#e8edf2" stroke="#9aa9b8"/><text x="55" y="38" text-anchor="middle" font-size="12">fs</text>
+        <rect x="120" y="8" width="180" height="30" rx="5" fill="#fde9dc" stroke="#c98753"/><text x="210" y="28" text-anchor="middle" font-size="12">scan_lines(lines)</text>
+        <rect x="120" y="52" width="180" height="30" rx="5" fill="#fde9dc" stroke="#c98753"/><text x="210" y="72" text-anchor="middle" font-size="12">_lines() #1</text>
+        <rect x="120" y="96" width="180" height="30" rx="5" fill="#fde9dc" stroke="#c98753"/><text x="210" y="116" text-anchor="middle" font-size="12">extract_entities(files)</text>
+        <rect x="120" y="140" width="180" height="30" rx="5" fill="#fde9dc" stroke="#c98753"/><text x="210" y="160" text-anchor="middle" font-size="12">_lines() #2</text>
+        <line x1="100" y1="33" x2="120" y2="23" stroke="#5c6b7a" marker-end="url(#a)"/>
+        <line x1="100" y1="33" x2="120" y2="111" stroke="#5c6b7a" marker-end="url(#a)"/>
+        <defs><marker id="a" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#5c6b7a"/></marker></defs>
+      </svg>
+      <p class="note">Two line walks, two owners of the same concept.</p>
+    </div>
+    <div class="panel"><h4>After</h4>
+      <svg viewBox="0 0 320 180" role="img" aria-label="After: one deep inspector">
+        <rect x="10" y="16" width="80" height="34" rx="5" fill="#e8edf2" stroke="#9aa9b8"/><text x="50" y="38" text-anchor="middle" font-size="12">fs</text>
+        <rect x="105" y="8" width="100" height="30" rx="5" fill="#e8edf2" stroke="#9aa9b8"/><text x="155" y="28" text-anchor="middle" font-size="12">scan (adapter)</text>
+        <rect x="105" y="60" width="195" height="52" rx="6" fill="#d8f0e7" stroke="#1d6f5c"/><text x="202" y="82" text-anchor="middle" font-size="13">inspector.inspect(files)</text><text x="202" y="100" text-anchor="middle" font-size="11" fill="#14513f">line model + rules + entities</text>
+        <rect x="105" y="128" width="90" height="30" rx="5" fill="#e8edf2" stroke="#9aa9b8"/><text x="150" y="148" text-anchor="middle" font-size="11">findings</text>
+        <rect x="210" y="128" width="90" height="30" rx="5" fill="#e8edf2" stroke="#9aa9b8"/><text x="255" y="148" text-anchor="middle" font-size="11">entities</text>
+        <line x1="90" y1="33" x2="105" y2="23" stroke="#5c6b7a" marker-end="url(#b)"/>
+        <line x1="155" y1="38" x2="190" y2="60" stroke="#5c6b7a" marker-end="url(#b)"/>
+        <line x1="170" y1="112" x2="150" y2="128" stroke="#5c6b7a" marker-end="url(#b)"/>
+        <line x1="235" y1="112" x2="255" y2="128" stroke="#5c6b7a" marker-end="url(#b)"/>
+        <defs><marker id="b" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#5c6b7a"/></marker></defs>
+      </svg>
+      <p class="note">One interface, one walk, two outputs.</p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>C2 — Make the exec decision a real seam <span class="badge strong">Strong</span></h3>
+  <div class="row"><b>Files</b><div><span class="files">src/cordon/hook.py</span> <span class="files">src/cordon/guard.py</span> <span class="files">src/cordon/policy.py</span> (new)</div></div>
+  <div class="row"><b>Problem</b><div><code>hook._bash</code> checks <code>exe not in caps["exec"]["allow"]</code>. <code>guard.run_shim</code> repeats the same check plus <code>BLOCK_SHIMS</code>. Two adapters, one rule, two implementations. A disagreement between them would produce different verdicts for the same manifest.</div></div>
+  <div class="row"><b>Solution</b><div>Add a deep <code>policy</code> module with <code>exec_verdict(manifest, name, extra_deny)</code>. Both adapters call it. One adapter would be a hypothetical seam; the hook and the shim make it real.</div></div>
+  <div class="row"><b>Benefits</b><div><b>Leverage</b>: a policy change reaches both harness seams at once. <b>Locality</b>: the rule and its reason sit in one place. The conformance test compares the two adapters on the same three calls.</div></div>
+  <div class="diagram">
+    <div class="panel"><h4>Before</h4>
+      <svg viewBox="0 0 320 130" role="img" aria-label="Before: duplicated exec rules">
+        <rect x="12" y="20" width="130" height="36" rx="5" fill="#fde9dc" stroke="#c98753"/><text x="77" y="43" text-anchor="middle" font-size="12">hook._bash</text>
+        <rect x="12" y="76" width="130" height="36" rx="5" fill="#fde9dc" stroke="#c98753"/><text x="77" y="99" text-anchor="middle" font-size="12">guard.run_shim</text>
+        <rect x="180" y="20" width="120" height="36" rx="5" fill="#f1f4f7" stroke="#9aa9b8"/><text x="240" y="43" text-anchor="middle" font-size="11">allowlist check A</text>
+        <rect x="180" y="76" width="120" height="36" rx="5" fill="#f1f4f7" stroke="#9aa9b8"/><text x="240" y="99" text-anchor="middle" font-size="11">allowlist check B</text>
+        <line x1="142" y1="38" x2="180" y2="38" stroke="#5c6b7a"/><line x1="142" y1="94" x2="180" y2="94" stroke="#5c6b7a"/>
+      </svg>
+      <p class="note">Two copies of one decision.</p>
+    </div>
+    <div class="panel"><h4>After</h4>
+      <svg viewBox="0 0 320 130" role="img" aria-label="After: shared policy module">
+        <rect x="12" y="20" width="100" height="36" rx="5" fill="#e8edf2" stroke="#9aa9b8"/><text x="62" y="43" text-anchor="middle" font-size="12">hook</text>
+        <rect x="12" y="76" width="100" height="36" rx="5" fill="#e8edf2" stroke="#9aa9b8"/><text x="62" y="99" text-anchor="middle" font-size="12">shim</text>
+        <rect x="150" y="42" width="150" height="48" rx="6" fill="#d8f0e7" stroke="#1d6f5c"/><text x="225" y="64" text-anchor="middle" font-size="12">policy.exec_verdict()</text><text x="225" y="82" text-anchor="middle" font-size="11" fill="#14513f">one rule, one reason</text>
+        <line x1="112" y1="38" x2="150" y2="58" stroke="#5c6b7a"/><line x1="112" y1="94" x2="150" y2="74" stroke="#5c6b7a"/>
+      </svg>
+      <p class="note">Two adapters, one seam.</p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>C3 — Deepen manifest derivation <span class="badge worth">Worth exploring</span></h3>
+  <div class="row"><b>Files</b><div><span class="files">src/cordon/manifest.py</span></div></div>
+  <div class="row"><b>Problem</b><div><code>derive</code> mixes candidate classification, operator grants and note construction in one long function. A grant loop builds a throwaway list for <code>fs.write</code> and then computes <code>fs_write</code> a second time. The reader has to hold two versions of the same value in their head.</div></div>
+  <div class="row"><b>Solution</b><div>Keep the public interface <code>derive(scan, grants)</code>. Move each candidate class into a small helper behind that interface and compute <code>fs_write</code> once. Preserve the exact <code>derived</code> records and the sorted <code>capabilities</code> so the golden snapshot stays byte-identical.</div></div>
+  <div class="row"><b>Benefits</b><div><b>Depth</b> rises without widening the interface. <b>Locality</b>: each decision sits with the candidate class it belongs to. ADR-0005 gates the change with the golden proof.</div></div>
+  <div class="row"><b>ADR check</b><div>No conflict. ADR-0002 fixes the output format, not the internal module shape.</div></div>
+</div>
+
+<div class="top">
+  <h2>Top recommendation</h2>
+  <p>Do C1 first, then C2, then C3. C1 removes a duplicated line walk and gives the whole program one inspection seam; C2 turns a duplicated rule into a tested adapter seam; C3 then shortens the remaining long function. Each step runs <code>scripts/golden.py</code> before and after. A byte difference in <code>golden_after.json</code> sends the refactor back. No function of the program changes.</p>
+  <p class="note">This report does not propose new interfaces for external users. The two published formats stay frozen at v1.</p>
+</div>
+</body>
+</html>

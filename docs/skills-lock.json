@@ -1,0 +1,253 @@
+{
+  "generated_by": "scripts/install_skills.py",
+  "schema": 1,
+  "skills": [
+    {
+      "installed_path": ".agents/skills/skill-creator",
+      "name": "skill-creator",
+      "sha256_of_skill_md": "dcd4803e61e913e6fc27294184cd3a71f09f5e924ff20c8a9a20173e7b3c2bcf",
+      "source": "anthropics/skills",
+      "source_path": "skill-creator"
+    },
+    {
+      "installed_path": ".agents/skills/webapp-testing",
+      "name": "webapp-testing",
+      "sha256_of_skill_md": "51b7349e77ec63b7744a6f63647e7566a0b4d2e301121cc10e8c2113af6556a2",
+      "source": "anthropics/skills",
+      "source_path": "webapp-testing"
+    },
+    {
+      "installed_path": ".agents/skills/mcp-builder",
+      "name": "mcp-builder",
+      "sha256_of_skill_md": "b483b56d6673134497e45489c317f26ae0f1429c194db0297e43073e17e6748c",
+      "source": "anthropics/skills",
+      "source_path": "mcp-builder"
+    },
+    {
+      "installed_path": ".agents/skills/frontend-design",
+      "name": "frontend-design",
+      "sha256_of_skill_md": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3",
+      "source": "anthropics/skills",
+      "source_path": "frontend-design"
+    },
+    {
+      "installed_path": ".agents/skills/improve-codebase-architecture",
+      "name": "improve-codebase-architecture",
+      "sha256_of_skill_md": "35b03a3db61e0f5aa333ea59b54963e45a3d2ace6649b2ef4f9576603e2582a6",
+      "source": "mattpocock/skills",
+      "source_path": "engineering/improve-codebase-architecture"
+    },
+    {
+      "installed_path": ".agents/skills/codebase-design",
+      "name": "codebase-design",
+      "sha256_of_skill_md": "2c20617f87ec8af6a434859f381b2f061a69b530444e74eb39e78bb016a6d1e2",
+      "source": "mattpocock/skills",
+      "source_path": "engineering/codebase-design"
+    },
+    {
+      "installed_path": ".agents/skills/domain-modeling",
+      "name": "domain-modeling",
+      "sha256_of_skill_md": "7b925d7b1e341a2eeae33ad68a8a8c0ab889a38ddd22a7598e4c240e5a7556a3",
+      "source": "mattpocock/skills",
+      "source_path": "engineering/domain-modeling"
+    },
+    {
+      "installed_path": ".agents/skills/tdd",
+      "name": "tdd",
+      "sha256_of_skill_md": "5505d25bbaa8fc14a79e4d20163936958992a2995b7f1dd1d6197edc9ed722e0",
+      "source": "mattpocock/skills",
+      "source_path": "engineering/tdd"
+    },
+    {
+      "installed_path": ".agents/skills/diagnosing-bugs",
+      "name": "diagnosing-bugs",
+      "sha256_of_skill_md": "849198df88cdb65fd0d97236604c1fca7ff2f22d2f705f9724a800d0266b118d",
+      "source": "mattpocock/skills",
+      "source_path": "engineering/diagnosing-bugs"
+    },
+    {
+      "installed_path": ".agents/skills/code-review",
+      "name": "code-review",
+      "sha256_of_skill_md": "9c921a8d88138a41401d8897ca1bb852088ab1b7b605cdd04edc13e3e8aab6dd",
+      "source": "mattpocock/skills",
+      "source_path": "engineering/code-review"
+    },
+    {
+      "installed_path": ".agents/skills/prototype",
+      "name": "prototype",
+      "sha256_of_skill_md": "714de632d116bb73f65cdb5a882db15b9369a6713b9a47c0fad827848f0bfbe3",
+      "source": "mattpocock/skills",
+      "source_path": "engineering/prototype"
+    },
+    {
+      "installed_path": ".agents/skills/grilling",
+      "name": "grilling",
+      "sha256_of_skill_md": "a146842ed93ca43d833550fa9adf02e58cb63c83fea9d4b4522995b82242d4e2",
+      "source": "mattpocock/skills",
+      "source_path": "productivity/grilling"
+    },
+    {
+      "installed_path": ".agents/skills/grill-me",
+      "name": "grill-me",
+      "sha256_of_skill_md": "caaf8b8de1684f96e26b28f3c29189db5c89cce4b73e1c93d86164f66ef88637",
+      "source": "mattpocock/skills",
+      "source_path": "productivity/grill-me"
+    },
+    {
+      "installed_path": ".agents/skills/writing-for-agents",
+      "name": "writing-for-agents",
+      "sha256_of_skill_md": "551adca942227b44192edba88acd4e8db911f0121ce58ad16944ccf6a896a74a",
+      "source": "mattpocock/skills",
+      "source_path": "productivity/writing-for-agents"
+    },
+    {
+      "installed_path": ".agents/skills/brainstorming",
+      "name": "brainstorming",
+      "sha256_of_skill_md": "2c9ca71f94886f9ca9f4aef055f7cafb3e1a9bdf3aeebf8f4cb547c69405d207",
+      "source": "obra/superpowers",
+      "source_path": "brainstorming"
+    },
+    {
+      "installed_path": ".agents/skills/writing-plans",
+      "name": "writing-plans",
+      "sha256_of_skill_md": "a6c67c1900064347c2a329990dd3c555657c51c3ec53b259a08aa01a2c26139a",
+      "source": "obra/superpowers",
+      "source_path": "writing-plans"
+    },
+    {
+      "installed_path": ".agents/skills/executing-plans",
+      "name": "executing-plans",
+      "sha256_of_skill_md": "deaf176fa179827e80f2ea3101db3ea90fdf562ebef340eba761e4687940f5f5",
+      "source": "obra/superpowers",
+      "source_path": "executing-plans"
+    },
+    {
+      "installed_path": ".agents/skills/test-driven-development",
+      "name": "test-driven-development",
+      "sha256_of_skill_md": "64b03fce4aee5a97a93160cea8111f3ba13a17b7c001db4bd5836d67fd10705d",
+      "source": "obra/superpowers",
+      "source_path": "test-driven-development"
+    },
+    {
+      "installed_path": ".agents/skills/systematic-debugging",
+      "name": "systematic-debugging",
+      "sha256_of_skill_md": "51c6435d98c83c42c96ba7c35725a0b2c376cd487fb1a4e6bd0ddbe7e33ef202",
+      "source": "obra/superpowers",
+      "source_path": "systematic-debugging"
+    },
+    {
+      "installed_path": ".agents/skills/verification-before-completion",
+      "name": "verification-before-completion",
+      "sha256_of_skill_md": "2befe7fc55bcadaa3d97dd9e8efeb633d2561c0ebe74c5a8b17c4d9e7e4520b3",
+      "source": "obra/superpowers",
+      "source_path": "verification-before-completion"
+    },
+    {
+      "installed_path": ".agents/skills/requesting-code-review",
+      "name": "requesting-code-review",
+      "sha256_of_skill_md": "2180e14a448e9410bec88e6646a2d1f0ce7fdd58de27388c1e052e929679d2bc",
+      "source": "obra/superpowers",
+      "source_path": "requesting-code-review"
+    },
+    {
+      "installed_path": ".agents/skills/receiving-code-review",
+      "name": "receiving-code-review",
+      "sha256_of_skill_md": "091df1629510af1b92fc4abd6f96732ebedb4cb2c0f3457e8f2740b0504a2438",
+      "source": "obra/superpowers",
+      "source_path": "receiving-code-review"
+    },
+    {
+      "installed_path": ".agents/skills/writing-skills",
+      "name": "writing-skills",
+      "sha256_of_skill_md": "8cb3ac68c6d8c4bb46886b998b09af7989643cab8bd0e46ee86dd62e64546bbe",
+      "source": "obra/superpowers",
+      "source_path": "writing-skills"
+    },
+    {
+      "installed_path": ".agents/skills/dispatching-parallel-agents",
+      "name": "dispatching-parallel-agents",
+      "sha256_of_skill_md": "1968923066f3b707eb01d1992cdf4c42284c3855f70253b9cd5000ff45fca13c",
+      "source": "obra/superpowers",
+      "source_path": "dispatching-parallel-agents"
+    },
+    {
+      "installed_path": ".agents/skills/subagent-driven-development",
+      "name": "subagent-driven-development",
+      "sha256_of_skill_md": "1baf70e307bde682c462513c86116333f1f066168c6710f45145bf5f0b00828d",
+      "source": "obra/superpowers",
+      "source_path": "subagent-driven-development"
+    },
+    {
+      "installed_path": ".agents/skills/using-superpowers",
+      "name": "using-superpowers",
+      "sha256_of_skill_md": "82c5c8866ad7f5dd4440ce66bd7806ba48a2f13771beae5cf112e53f08fe36ba",
+      "source": "obra/superpowers",
+      "source_path": "using-superpowers"
+    },
+    {
+      "installed_path": ".agents/skills/find-skills",
+      "name": "find-skills",
+      "sha256_of_skill_md": "c00eeea0e13e74fe4a9d84ba0a8542205a1b736d65f13134fe1a6647eb14976f",
+      "source": "vercel-labs/skills",
+      "source_path": "find-skills"
+    },
+    {
+      "installed_path": ".agents/skills/pr-labeling",
+      "name": "pr-labeling",
+      "sha256_of_skill_md": "1f794aeb1e5110008980aff363197f8cf3e37c71eedc498d7c56dc8e7bfbc5a5",
+      "source": "vercel-labs/skills",
+      "source_path": ".automations/pr-labeling/skills/pr-labeling"
+    },
+    {
+      "installed_path": ".agents/skills/triage",
+      "name": "triage",
+      "sha256_of_skill_md": "b512d5d237bf8669d8200049538cfe40c4bdc98586097cafaaa62fe6df838d12",
+      "source": "vercel-labs/skills",
+      "source_path": ".automations/triage/skills/triage"
+    },
+    {
+      "installed_path": ".agents/skills/stop-slop",
+      "name": "stop-slop",
+      "sha256_of_skill_md": "7432a1d9ebdd42b27666da8458af252edf549f723fb14bcd4791425103930310",
+      "source": "hardikpandya/stop-slop",
+      "source_path": "."
+    }
+  ],
+  "sources": {
+    "anthropics/skills": {
+      "license": "upstream: THIRD_PARTY_NOTICES.md / Apache-2.0 for example skills (verify upstream)",
+      "note": "Anthropic Agent Skills reference repo and SKILL.md format source.",
+      "sha256": "41bf4684f2a22df492746717f6d8d209b9c6fcd2b5e57c45f6f3dcee49dd87aa",
+      "tarball": "https://codeload.github.com/anthropics/skills/tar.gz/refs/heads/main",
+      "url": "https://github.com/anthropics/skills"
+    },
+    "hardikpandya/stop-slop": {
+      "license": "MIT (upstream LICENSE, Copyright 2025 Hardik Pandya)",
+      "note": "Stop Slop: removes predictable AI writing patterns from prose.",
+      "sha256": "fa80c86286efb32507edf769cfeeacbbd1bfca941cc2bf15c8c9d6188b0430f8",
+      "tarball": "https://codeload.github.com/hardikpandya/stop-slop/tar.gz/refs/heads/main",
+      "url": "https://github.com/hardikpandya/stop-slop"
+    },
+    "mattpocock/skills": {
+      "license": "MIT (upstream LICENSE, Copyright 2026 Matt Pocock)",
+      "note": "Skills For Real Engineers; includes improve-codebase-architecture and grilling.",
+      "sha256": "7ea143a8cc517955e76c34be9e751285a64adf74ed13a9b1e2adc426f24d14c2",
+      "tarball": "https://codeload.github.com/mattpocock/skills/tar.gz/refs/heads/main",
+      "url": "https://github.com/mattpocock/skills"
+    },
+    "obra/superpowers": {
+      "license": "MIT (upstream LICENSE, Copyright 2025 Jesse Vincent)",
+      "note": "Superpowers workflow library; brainstorming is the design-first gate.",
+      "sha256": "fbb262b662873eca70bfc4152c688852e97f93c811e9635d490453941fecad05",
+      "tarball": "https://codeload.github.com/obra/superpowers/tar.gz/refs/heads/main",
+      "url": "https://github.com/obra/superpowers"
+    },
+    "vercel-labs/skills": {
+      "license": "MIT (upstream LICENSE, Copyright 2026 Vercel, Inc.)",
+      "note": "The open agent skills CLI (npx skills) and its own skills.",
+      "sha256": "daef311a582848f22591ac1f01fe63336442b8d64dde722a163a80ec4da0f5b5",
+      "tarball": "https://codeload.github.com/vercel-labs/skills/tar.gz/refs/heads/main",
+      "url": "https://github.com/vercel-labs/skills"
+    }
+  }
+}

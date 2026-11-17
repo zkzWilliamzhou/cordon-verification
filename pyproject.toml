@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cordon-skill"
+version = "0.1.0"
+description = "Offline trust boundary for AI agent skills: scan, capability manifest, pin, policy hook, audit ledger"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+keywords = ["agent-skills", "security", "supply-chain", "static-analysis", "claude-code"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.10",
+  "Topic :: Security",
+]
+
+[project.optional-dependencies]
+sign = ["cryptography>=41"]
+test = []
+
+[project.scripts]
+cordon = "cordon.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

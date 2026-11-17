@@ -1,0 +1,25 @@
+{
+  "created_utc": 1700000000,
+  "disclaimer": "Integrity pin, not a safety verdict. Re-verify immediately before use.",
+  "errors": [],
+  "file_count": 2,
+  "files": [
+    {
+      "mode": 511,
+      "path": "SKILL.md",
+      "sha256": "b713b4c07f7ffdc35a03ed018e4fc99f3715c3c3b8460d9501cf55df3bb4e891",
+      "size": 399
+    },
+    {
+      "mode": 511,
+      "path": "references/style.md",
+      "sha256": "5d6671c4d1bd9ffd02e10d72102e4df4f133a3017913680aa7d5981db24bb62f",
+      "size": 56
+    }
+  ],
+  "schema": "cordon.pin/v1",
+  "skill_root": "examples/clean-skill",
+  "tool_version": "0.1.0",
+  "total_bytes": 455,
+  "tree_hash": "a46f413edaff094ddc249fcef95896453b548acdce1c4a9ed08a7a4dc236663f"
+}

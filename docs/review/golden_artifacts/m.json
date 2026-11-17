@@ -1,0 +1,78 @@
+{
+  "capabilities": {
+    "env": {
+      "allow": [],
+      "deny": []
+    },
+    "exec": {
+      "allow": [
+        "python3"
+      ],
+      "deny": [
+        "bash"
+      ]
+    },
+    "fs": {
+      "read": [
+        "input.json",
+        "references/style.md"
+      ],
+      "write": []
+    },
+    "net": {
+      "allow_hosts": [],
+      "deny_hosts": []
+    }
+  },
+  "defaults": {
+    "env": "deny",
+    "exec": "deny",
+    "fs": "deny",
+    "net": "deny"
+  },
+  "derived": [
+    {
+      "capability": "exec",
+      "decision": "denied",
+      "origin": "SKILL.md:10",
+      "reason": "dangerous executable or blocking finding",
+      "value": "bash"
+    },
+    {
+      "capability": "exec",
+      "decision": "allowed",
+      "origin": "SKILL.md:11",
+      "reason": "safe executable in code context",
+      "value": "python3"
+    },
+    {
+      "capability": "fs.read",
+      "decision": "allowed",
+      "origin": "SKILL.md:11",
+      "reason": "relative path inside skill root",
+      "value": "input.json"
+    },
+    {
+      "capability": "fs.read",
+      "decision": "allowed",
+      "origin": "SKILL.md:8",
+      "reason": "relative path inside skill root",
+      "value": "references/style.md"
+    }
+  ],
+  "finding_ids": [],
+  "policy": {
+    "block_on": [
+      "critical",
+      "high"
+    ],
+    "confidence": "high",
+    "label": "Advisory. A pure-Python hook or PATH shim is bypassable. Use an OS backend (Landlock/bubblewrap/AppContainer) for enforcement.",
+    "mode": "advisory"
+  },
+  "policy_hash": "326f3223bf554d00d5280633a273d35a688d3a483db90a19602e951ba0d55f16",
+  "scan_digest": "57023fb9e95479b14c763abfb4863bf138de7af26f9af157381a1b1bc985eb75",
+  "schema": "cordon.capability-manifest/v1",
+  "skill_root": "examples/clean-skill",
+  "tool_version": "0.1.0"
+}

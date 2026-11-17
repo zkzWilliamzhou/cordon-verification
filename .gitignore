@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+*.part
+*.egg-info/
+build/
+dist/
+.cordon/
+*.sarif
+cordon.sarif
+docs/review/golden_verified.json
+.DS_Store
